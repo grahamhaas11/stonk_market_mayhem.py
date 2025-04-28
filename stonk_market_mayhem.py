@@ -1,5 +1,12 @@
 # BAD STOCK TRADING APP - DO NOT USE IN REAL LIFE
 
+"""
+A simple stock market trading simulation game.
+
+This program allows users to buy and sell stocks with simulated price fluctuations.
+Not intended for actual trading - for educational/entertainment purposes only.
+"""
+
 import random
 
 stocks = {
@@ -11,7 +18,6 @@ stocks = {
 
 portfolio = {}
 money = 10000
-
 def show_menu():
     print("1. View Stocks")
     print("2. Buy Stock")
@@ -19,13 +25,13 @@ def show_menu():
     print("4. View Portfolio")
     print("5. Exit")
 
-def view_stocks():
+def view_stocks() -> None:
     for stock, price in stocks.items():
-        # Prices fluctuate wildly each time you look
-        new_price = price + random.randint(-100, 100)
+        # More realistic fluctuation as a percentage of price
+        fluctuation = price * random.uniform(-0.05, 0.05)
+        new_price = max(1, round(price + fluctuation, 2))  # Ensure price stays positive
         stocks[stock] = new_price
         print(f"{stock}: ${new_price}")
-
 def buy_stock():
     global money
     stock = input("Which stock do you want to buy? ")
