@@ -19,6 +19,9 @@ stocks = {
 portfolio = {}
 money = 10000
 def show_menu():
+    """
+    Displays the main menu options for the stock trading simulation game.
+    """
     print("1. View Stocks")
     print("2. Buy Stock")
     print("3. Sell Stock")
@@ -26,6 +29,11 @@ def show_menu():
     print("5. Exit")
 
 def view_stocks() -> None:
+    """
+    Updates each stock's price with a random fluctuation and displays the new prices.
+    
+    Each stock price is adjusted by a random percentage between -5% and +5%, ensuring the price does not fall below 1.
+    """
     for stock, price in stocks.items():
         # More realistic fluctuation as a percentage of price
         fluctuation = price * random.uniform(-0.05, 0.05)
@@ -33,6 +41,11 @@ def view_stocks() -> None:
         stocks[stock] = new_price
         print(f"{stock}: ${new_price}")
 def buy_stock():
+    """
+    Processes the purchase of shares for a selected stock if sufficient funds are available.
+    
+    Prompts the user to choose a stock and quantity to buy, deducts the total cost from available cash if affordable, and updates the portfolio with the purchased shares. Prints a confirmation message on success or an error message if funds are insufficient.
+    """
     global money
     stock = input("Which stock do you want to buy? ")
     qty = int(input("How many shares? "))
@@ -48,6 +61,11 @@ def buy_stock():
         print("You broke.")
 
 def sell_stock():
+    """
+    Sells a specified quantity of owned stock and updates cash and portfolio.
+    
+    Prompts the user to enter a stock symbol and the number of shares to sell. If the user owns enough shares, the shares are sold at the current price, cash is increased, and the portfolio is updated. Otherwise, notifies the user of insufficient holdings.
+    """
     global money
     stock = input("Which stock do you want to sell? ")
     qty = int(input("How many shares? "))
@@ -59,6 +77,9 @@ def sell_stock():
         print("You don’t own that much.")
 
 def view_portfolio():
+    """
+    Displays the user's current stock holdings and available cash balance.
+    """
     print("Your portfolio:")
     for stock, qty in portfolio.items():
         print(f"{stock}: {qty} shares")
